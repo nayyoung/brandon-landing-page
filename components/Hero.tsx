@@ -50,11 +50,12 @@ export const Hero: React.FC = () => {
         {/* Hero Image / Visual */}
         <div className="relative h-[500px] md:h-[650px] w-full rounded-sm overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-transparent to-transparent z-10 opacity-60"></div>
-          {/* Aesthetic Seattle Skyline/Mood Image - Public Market Center */}
+          {/* Aesthetic Seattle Skyline/Mood Image - Sunset Dusk */}
           <img 
-            src="https://file-service.aistudio.google.com/file/3494578b-3e58-4858-8255-89f07823537a" 
-            alt="Seattle Public Market Center Neon Sign" 
+            src="https://i2.pickpik.com/photos/847/134/369/seattle-washington-sunset-dusk-ea9871407542a406cb83e29502939243.jpg" 
+            alt="Seattle Skyline at Dusk" 
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[0.2] contrast-110"
+            referrerPolicy="no-referrer"
           />
           
           {/* Floating Card */}
