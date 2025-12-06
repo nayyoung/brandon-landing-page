@@ -15,9 +15,16 @@ export const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Submitted:", formState);
+    
+    // Construct the mailto link with the form data
+    const subject = `Quick Question from ${formState.name} (Website Lead)`;
+    const body = `Name: ${formState.name}\nContact Info: ${formState.contact}\n\nMessage:\n${formState.message}`;
+    const directMailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Open the user's email client
+    window.location.href = directMailto;
+
     setIsSubmitted(true);
-    // In a real app, this would send to an API
   };
 
   return (
@@ -101,7 +108,7 @@ export const Contact: React.FC = () => {
                     </div>
 
                     <Button type="submit" fullWidth variant="secondary">
-                      Send Message
+                      Send Message via Email
                     </Button>
                     <p className="text-center text-xs text-gray-600 mt-2">I respond personally within 24 hours.</p>
                   </form>
@@ -110,8 +117,18 @@ export const Contact: React.FC = () => {
                     <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 mb-4">
                       <CheckCircle className="w-8 h-8" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white">Message Sent!</h3>
-                    <p className="text-gray-400">Thanks for reaching out, {formState.name}. I'll get back to you shortly.</p>
+                    <h3 className="text-2xl font-bold text-white">Opening Email Client...</h3>
+                    <p className="text-gray-400">If your email didn't open automatically, please click the button below.</p>
+                    <Button 
+                      onClick={() => {
+                        const subject = `Quick Question from ${formState.name} (Website Lead)`;
+                        const body = `Name: ${formState.name}\nContact Info: ${formState.contact}\n\nMessage:\n${formState.message}`;
+                        window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                      }}
+                      variant="primary"
+                    >
+                      Click to Send
+                    </Button>
                     <button 
                       onClick={() => {
                         setIsSubmitted(false);
@@ -119,7 +136,7 @@ export const Contact: React.FC = () => {
                       }}
                       className="text-copper-500 text-sm font-semibold hover:underline mt-4"
                     >
-                      Send another message
+                      Back to form
                     </button>
                   </div>
                 )}
