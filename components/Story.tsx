@@ -7,18 +7,19 @@ export const Story: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center">
         <div className="md:col-span-5 order-2 md:order-1">
             <div className="relative aspect-[4/5] bg-gray-800 rounded-sm overflow-hidden">
+                 {/* Aesthetic Street Art / Neighborhood Image - Fremont */}
                  <img 
-                    src="https://picsum.photos/600/800?random=10" 
-                    alt="Brandon DJing" 
-                    className="w-full h-full object-cover filter grayscale contrast-125 hover:grayscale-0 transition-all duration-500"
+                    src="https://file-service.aistudio.google.com/file/10b9f338-0857-4148-89c0-9d08e5399580" 
+                    alt="Seattle Neighborhood Vibes" 
+                    className="w-full h-full object-cover filter grayscale-[0.1] contrast-110 hover:grayscale-0 transition-all duration-500"
                  />
-                 <div className="absolute inset-0 bg-copper-500/20 mix-blend-multiply"></div>
+                 <div className="absolute inset-0 bg-copper-500/10 mix-blend-multiply"></div>
             </div>
         </div>
         
         <div className="md:col-span-7 order-1 md:order-2 md:pl-10">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-8">
-            The <span className="text-copper-500">Minister of Music</span> who sells skyscrapers.
+            The <span className="text-copper-500">Minister of Music</span> who closes million-dollar deals.
           </h2>
           
           <div className="space-y-6 text-lg text-gray-400 leading-relaxed font-sans font-light">

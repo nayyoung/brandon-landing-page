@@ -45,32 +45,16 @@ export const Hero: React.FC = () => {
               Read My Story
             </Button>
           </div>
-
-          <div className="flex items-center gap-4 pt-8 text-sm text-gray-500">
-            <div className="flex -space-x-3">
-               {/* Placeholder avatars representing community */}
-              <div className="w-10 h-10 rounded-full border-2 border-charcoal-900 bg-gray-700 overflow-hidden">
-                 <img src="https://picsum.photos/100/100?random=1" alt="Client" className="w-full h-full object-cover grayscale opacity-70" />
-              </div>
-              <div className="w-10 h-10 rounded-full border-2 border-charcoal-900 bg-gray-700 overflow-hidden">
-                 <img src="https://picsum.photos/100/100?random=2" alt="Client" className="w-full h-full object-cover grayscale opacity-70" />
-              </div>
-              <div className="w-10 h-10 rounded-full border-2 border-charcoal-900 bg-gray-700 overflow-hidden">
-                 <img src="https://picsum.photos/100/100?random=3" alt="Client" className="w-full h-full object-cover grayscale opacity-70" />
-              </div>
-            </div>
-            <p>Trusted by Seattle's creative community</p>
-          </div>
         </div>
 
         {/* Hero Image / Visual */}
         <div className="relative h-[500px] md:h-[650px] w-full rounded-sm overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-transparent to-transparent z-10 opacity-60"></div>
-          {/* Using a placeholder that fits the vibe: moody, urban, or a portrait */}
+          {/* Aesthetic Seattle Skyline/Mood Image - Public Market Center */}
           <img 
-            src="https://picsum.photos/800/1000?grayscale" 
-            alt="Brandon Young in Seattle" 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale contrast-125"
+            src="https://file-service.aistudio.google.com/file/3494578b-3e58-4858-8255-89f07823537a" 
+            alt="Seattle Public Market Center Neon Sign" 
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[0.2] contrast-110"
           />
           
           {/* Floating Card */}

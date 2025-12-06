@@ -47,16 +47,6 @@ export const Contact: React.FC = () => {
                 I usually book out 1 week in advance.
               </p>
             </div>
-
-            <div className="flex items-center space-x-4 text-gray-500 text-sm">
-                <span className="w-12 h-[1px] bg-gray-700"></span>
-                <span>OR</span>
-                <span className="w-12 h-[1px] bg-gray-700"></span>
-            </div>
-
-            <div>
-               <p className="text-gray-400">Prefer to text? <a href="tel:2065550123" className="text-copper-500 font-semibold hover:underline">206-555-0123</a></p>
-            </div>
           </div>
 
           {/* Option B: Quick Question Form */}

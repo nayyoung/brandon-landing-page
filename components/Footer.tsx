@@ -1,5 +1,5 @@
 import React from 'react';
-import { Instagram, Linkedin, Mail } from 'lucide-react';
+import { Instagram, Linkedin, Mail, AtSign, Video } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -12,13 +12,19 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-6">
-          <a href="#" className="text-gray-500 hover:text-copper-500 transition-colors">
+          <a href="https://www.instagram.com/_brandonjyoung" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-copper-500 transition-colors" title="Instagram">
             <Instagram className="w-5 h-5" />
           </a>
-          <a href="#" className="text-gray-500 hover:text-copper-500 transition-colors">
+          <a href="https://www.threads.net/@_brandonjyoung" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-copper-500 transition-colors" title="Threads">
+            <AtSign className="w-5 h-5" />
+          </a>
+          <a href="https://www.tiktok.com/@_brandonjyoung" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-copper-500 transition-colors" title="TikTok">
+            <Video className="w-5 h-5" />
+          </a>
+          <a href="https://www.linkedin.com/in/brandon-young-0669b21ab" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-copper-500 transition-colors" title="LinkedIn">
             <Linkedin className="w-5 h-5" />
           </a>
-          <a href="mailto:brandeauxmedia@gmail.com" className="text-gray-500 hover:text-copper-500 transition-colors">
+          <a href="mailto:brandeauxmedia@gmail.com" className="text-gray-500 hover:text-copper-500 transition-colors" title="Email">
             <Mail className="w-5 h-5" />
           </a>
         </div>
