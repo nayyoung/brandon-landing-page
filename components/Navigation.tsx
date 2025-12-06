@@ -62,17 +62,18 @@ export const Navigation: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden z-50 text-white p-2"
+            className="md:hidden z-50 text-white p-2 -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            {mobileMenuOpen ? <X /> : <Menu />}
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </nav>
 
       {/* Mobile Menu Overlay */}
       <div 
-        className={`fixed inset-0 bg-charcoal-900 z-40 flex flex-col items-center justify-center space-y-8 transition-transform duration-500 ease-in-out md:hidden ${
+        className={`fixed inset-0 bg-charcoal-900 z-40 flex flex-col items-center justify-center space-y-6 transition-transform duration-500 ease-in-out md:hidden ${
           mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
@@ -80,16 +81,16 @@ export const Navigation: React.FC = () => {
           <a 
             key={link.name} 
             href={link.href} 
-            className="font-display text-3xl font-bold text-white hover:text-copper-500 transition-colors"
+            className="font-display text-2xl sm:text-3xl font-bold text-white hover:text-copper-500 transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             {link.name}
           </a>
         ))}
-        <div className="h-px w-24 bg-white/10 my-8"></div>
+        <div className="h-px w-24 bg-white/10 my-4"></div>
         <a 
           href={mailtoLink}
-          className="text-xl font-medium text-copper-500"
+          className="text-lg sm:text-xl font-medium text-copper-500 py-2"
           onClick={() => setMobileMenuOpen(false)}
         >
           Book Strategy Call

@@ -29,28 +29,28 @@ export const Contact: React.FC = () => {
 
   return (
     <Section id="contact" className="bg-gradient-to-br from-charcoal-800 to-black">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-24">
           
           {/* Option A: Book a Call */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <div>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
-                Let's talk about <br/><span className="text-copper-500">your goals</span>.
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
+                Let's talk about <br className="hidden sm:block"/><span className="text-copper-500">your goals</span>.
               </h2>
-              <p className="text-gray-400 text-lg max-w-md">
+              <p className="text-gray-400 text-base sm:text-lg max-w-md">
                 No pressure. No sales pitch. Just a conversation about what you're trying to build and how I can help you get there.
               </p>
             </div>
 
-            <div className="bg-charcoal-900 border border-white/10 p-8 rounded-sm">
-              <h3 className="text-xl font-bold text-white mb-4">Ready to start?</h3>
-              <p className="text-gray-500 mb-6 text-sm">Book a 30-minute strategy session directly on my calendar.</p>
+            <div className="bg-charcoal-900 border border-white/10 p-6 sm:p-8 rounded-sm">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Ready to start?</h3>
+              <p className="text-gray-500 mb-4 sm:mb-6 text-sm">Book a 30-minute strategy session directly on my calendar.</p>
               <Button href={mailtoLink} fullWidth className="justify-between group">
                 Schedule Now
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <p className="mt-4 text-xs text-center text-gray-600">
+              <p className="mt-3 sm:mt-4 text-xs text-center text-gray-600">
                 I usually book out 1 week in advance.
               </p>
             </div>
@@ -59,10 +59,10 @@ export const Contact: React.FC = () => {
           {/* Option B: Quick Question Form */}
           <div className="relative">
              <div className="absolute -inset-4 bg-copper-500/10 rounded-lg blur-xl"></div>
-             <div className="relative bg-charcoal-900 p-8 md:p-10 border border-white/10 rounded-sm">
+             <div className="relative bg-charcoal-900 p-6 sm:p-8 md:p-10 border border-white/10 rounded-sm">
                 
                 {!isSubmitted ? (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                     <div className="flex items-center gap-3 mb-2 text-copper-500">
                         <MessageSquare className="w-5 h-5" />
                         <h3 className="font-bold uppercase tracking-wider text-sm">Quick Question?</h3>
@@ -74,7 +74,7 @@ export const Contact: React.FC = () => {
                         id="name"
                         type="text" 
                         required
-                        className="w-full bg-charcoal-800 border border-gray-700 text-white p-3 rounded-sm focus:border-copper-500 focus:ring-1 focus:ring-copper-500 outline-none transition-all"
+                        className="w-full bg-charcoal-800 border border-gray-700 text-white p-3 rounded-sm focus:border-copper-500 focus:ring-1 focus:ring-copper-500 outline-none transition-all text-base"
                         placeholder="Your name"
                         value={formState.name}
                         onChange={(e) => setFormState({...formState, name: e.target.value})}
@@ -87,7 +87,7 @@ export const Contact: React.FC = () => {
                         id="contact"
                         type="text" 
                         required
-                        className="w-full bg-charcoal-800 border border-gray-700 text-white p-3 rounded-sm focus:border-copper-500 focus:ring-1 focus:ring-copper-500 outline-none transition-all"
+                        className="w-full bg-charcoal-800 border border-gray-700 text-white p-3 rounded-sm focus:border-copper-500 focus:ring-1 focus:ring-copper-500 outline-none transition-all text-base"
                         placeholder="how can I reach you?"
                         value={formState.contact}
                         onChange={(e) => setFormState({...formState, contact: e.target.value})}
@@ -100,7 +100,7 @@ export const Contact: React.FC = () => {
                         id="message"
                         required
                         rows={4}
-                        className="w-full bg-charcoal-800 border border-gray-700 text-white p-3 rounded-sm focus:border-copper-500 focus:ring-1 focus:ring-copper-500 outline-none transition-all resize-none"
+                        className="w-full bg-charcoal-800 border border-gray-700 text-white p-3 rounded-sm focus:border-copper-500 focus:ring-1 focus:ring-copper-500 outline-none transition-all resize-none text-base"
                         placeholder="I'm thinking about buying a condo in Capitol Hill..."
                         value={formState.message}
                         onChange={(e) => setFormState({...formState, message: e.target.value})}
@@ -113,12 +113,12 @@ export const Contact: React.FC = () => {
                     <p className="text-center text-xs text-gray-600 mt-2">I respond personally within 24 hours.</p>
                   </form>
                 ) : (
-                  <div className="h-full min-h-[400px] flex flex-col items-center justify-center text-center space-y-4 animate-fade-in-up">
-                    <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 mb-4">
-                      <CheckCircle className="w-8 h-8" />
+                  <div className="h-full min-h-[350px] sm:min-h-[400px] flex flex-col items-center justify-center text-center space-y-4 animate-fade-in-up">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 mb-4">
+                      <CheckCircle className="w-7 h-7 sm:w-8 sm:h-8" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white">Opening Email Client...</h3>
-                    <p className="text-gray-400">If your email didn't open automatically, please click the button below.</p>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white">Opening Email Client...</h3>
+                    <p className="text-gray-400 text-sm sm:text-base">If your email didn't open automatically, please click the button below.</p>
                     <Button 
                       onClick={() => {
                         const subject = `Quick Question from ${formState.name} (Website Lead)`;
