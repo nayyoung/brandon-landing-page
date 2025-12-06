@@ -38,7 +38,7 @@ export const Section: React.FC<SectionProps> = ({ children, id, className = '', 
     <section 
       id={id} 
       ref={ref}
-      className={`relative w-full overflow-hidden ${noPadding ? '' : 'py-20 md:py-32'} ${className}`}
+      className={`relative w-full overflow-hidden ${noPadding ? '' : 'py-16 sm:py-20 md:py-32'} ${className}`}
     >
       <div className={`reveal-on-scroll ${isVisible ? 'is-visible' : ''}`}>
         {children}
