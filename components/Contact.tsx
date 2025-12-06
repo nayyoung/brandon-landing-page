@@ -32,13 +32,11 @@ export const Contact: React.FC = () => {
       if (supabaseError) throw supabaseError;
 
       // 2. Success!
-      console.log("Lead saved to Supabase!");
       setIsSubmitted(true);
       
     } catch (err) {
-      console.error("Error saving lead:", err);
       // 3. Fallback: If DB fails, open email client so lead isn't lost
-      setError("Connecting to server... Opening your email client as a backup.");
+      setError("Failed to save to database. Opening your email client as a backup.");
       
       setTimeout(() => {
          const subject = `Quick Question from ${formState.name} (Website Lead)`;
