@@ -52,10 +52,9 @@ export const Hero: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal-900 via-transparent to-transparent z-10 opacity-60"></div>
           {/* Aesthetic Seattle Skyline/Mood Image - Sunset Dusk */}
           <img 
-            src="https://i2.pickpik.com/photos/847/134/369/seattle-washington-sunset-dusk-ea9871407542a406cb83e29502939243.jpg" 
+            src="/images/seattle-skyline.svg" 
             alt="Seattle Skyline at Dusk" 
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[0.2] contrast-110"
-            referrerPolicy="no-referrer"
           />
           
           {/* Floating Card */}

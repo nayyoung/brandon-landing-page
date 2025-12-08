@@ -9,10 +9,9 @@ export const Story: React.FC = () => {
             <div className="relative aspect-[4/5] bg-gray-800 rounded-sm overflow-hidden">
                  {/* Aesthetic Space Needle Landmark Image */}
                  <img 
-                    src="https://i1.pickpik.com/photos/813/553/215/seattle-washington-space-needle-landmark-6b593daa7444f7e36ce2ddf968bed85d.jpg" 
+                    src="/images/space-needle.svg" 
                     alt="Seattle Space Needle Landmark" 
                     className="w-full h-full object-cover filter grayscale-[0.1] contrast-110 hover:grayscale-0 transition-all duration-500"
-                    referrerPolicy="no-referrer"
                  />
                  <div className="absolute inset-0 bg-copper-500/10 mix-blend-multiply"></div>
             </div>

@@ -19,6 +19,14 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: 'About', href: '#story' },
     { name: 'Who I Help', href: '#audience' },
