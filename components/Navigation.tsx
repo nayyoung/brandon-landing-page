@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { CONTACT_EMAIL, EMAIL_SUBJECTS, EMAIL_BODIES, createMailtoLink } from '../constants';
 
-const CONTACT_EMAIL = "brandeauxmedia@gmail.com";
-const SUBJECT = "Real Estate Strategy Call";
-const BODY = "Hi Brandon,\n\nI'd like to schedule a call to talk about my real estate goals.\n\nMy name:\nPhone number:\nBest time to reach me:\n\nThanks!";
-
-const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(BODY)}`;
+const mailtoLink = createMailtoLink(CONTACT_EMAIL, EMAIL_SUBJECTS.STRATEGY_CALL, EMAIL_BODIES.STRATEGY_CALL);
 
 export const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,6 +22,11 @@ export const Navigation: React.FC = () => {
     } else {
       document.body.style.overflow = 'unset';
     }
+    
+    // Cleanup: restore overflow when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [mobileMenuOpen]);
 
   const navLinks = [

@@ -1,12 +1,9 @@
 import React from 'react';
 import { Button } from './ui/Button';
 import { ArrowDown } from 'lucide-react';
+import { CONTACT_EMAIL, EMAIL_SUBJECTS, EMAIL_BODIES, createMailtoLink } from '../constants';
 
-const CONTACT_EMAIL = "brandeauxmedia@gmail.com";
-const SUBJECT = "Real Estate Strategy Call";
-const BODY = "Hi Brandon,\n\nI'd like to schedule a call to talk about my real estate goals.\n\nMy name:\nPhone number:\nBest time to reach me:\n\nThanks!";
-
-const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(BODY)}`;
+const mailtoLink = createMailtoLink(CONTACT_EMAIL, EMAIL_SUBJECTS.STRATEGY_CALL, EMAIL_BODIES.STRATEGY_CALL);
 
 export const Hero: React.FC = () => {
   return (

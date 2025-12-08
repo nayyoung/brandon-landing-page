@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Section } from './ui/Section';
 import { Button } from './ui/Button';
 import { ArrowRight, MessageSquare, CheckCircle, Loader2 } from 'lucide-react';
-import { supabase } from '../lib/supabase'; // Import the client we just made
-
-const CONTACT_EMAIL = "brandeauxmedia@gmail.com";
+import { supabase } from '../lib/supabase';
+import { CONTACT_EMAIL, EMAIL_SUBJECTS, EMAIL_BODIES, createMailtoLink } from '../constants';
 
 export const Contact: React.FC = () => {
   const [formState, setFormState] = useState({ name: '', contact: '', message: '' });
@@ -39,9 +38,9 @@ export const Contact: React.FC = () => {
       setError("Failed to save to database. Opening your email client as a backup.");
       
       setTimeout(() => {
-         const subject = `Quick Question from ${formState.name} (Website Lead)`;
-         const body = `Name: ${formState.name}\nContact Info: ${formState.contact}\n\nMessage:\n${formState.message}`;
-         window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+         const subject = EMAIL_SUBJECTS.WEBSITE_LEAD(formState.name);
+         const body = EMAIL_BODIES.WEBSITE_LEAD(formState.name, formState.contact, formState.message);
+         window.location.href = createMailtoLink(CONTACT_EMAIL, subject, body);
          setIsSubmitted(true);
       }, 1500);
     } finally {
