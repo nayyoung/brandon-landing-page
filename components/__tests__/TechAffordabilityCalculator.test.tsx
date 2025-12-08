@@ -96,8 +96,12 @@ describe('TechAffordabilityCalculator', () => {
     it('displays calculation assumptions', () => {
       renderWithRouter(<TechAffordabilityCalculator />);
       expect(screen.getByText(/Assumptions/i)).toBeInTheDocument();
-      expect(screen.getByText(/7% interest rate/i)).toBeInTheDocument();
-      expect(screen.getByText(/28% of gross monthly income/i)).toBeInTheDocument();
+      expect(screen.getByText((content, element) => {
+        return element?.tagName === 'LI' && content.includes('% interest rate on') && content.includes('-year fixed mortgage');
+      })).toBeInTheDocument();
+      expect(screen.getByText((content, element) => {
+        return element?.tagName === 'LI' && content.includes('% of gross monthly income for housing costs');
+      })).toBeInTheDocument();
     });
   });
 

@@ -3,10 +3,10 @@ import { Calculator, DollarSign, TrendingUp, Home } from 'lucide-react';
 import { Section } from './ui/Section';
 import { Button } from './ui/Button';
 
-interface RSUVesting {
-  year: number;
-  amount: number;
-}
+// Mortgage calculation constants
+const INTEREST_RATE = 0.07; // 7% annual interest rate
+const LOAN_TERM_YEARS = 30;
+const HOUSING_COST_RATIO = 0.28; // 28% of gross monthly income
 
 export const TechAffordabilityCalculator: React.FC = () => {
   const [baseSalary, setBaseSalary] = useState<string>('');
@@ -32,12 +32,12 @@ export const TechAffordabilityCalculator: React.FC = () => {
     
     // Traditional rule: 28% of gross monthly income for housing
     const monthlyIncome = totalAnnualIncome / 12;
-    const maxMonthlyPayment = monthlyIncome * 0.28;
+    const maxMonthlyPayment = monthlyIncome * HOUSING_COST_RATIO;
     
-    // Estimate home price assuming 7% interest, 30-year mortgage
-    // Using simplified calculation: Payment = P * [r(1+r)^n]/[(1+r)^n-1]
-    const monthlyRate = 0.07 / 12;
-    const numPayments = 30 * 12;
+    // Estimate home price using mortgage calculation
+    // Formula: Payment = P * [r(1+r)^n]/[(1+r)^n-1]
+    const monthlyRate = INTEREST_RATE / 12;
+    const numPayments = LOAN_TERM_YEARS * 12;
     
     // Solve for principal: P = Payment * [(1+r)^n-1] / [r(1+r)^n]
     const factor = Math.pow(1 + monthlyRate, numPayments);
@@ -263,8 +263,8 @@ export const TechAffordabilityCalculator: React.FC = () => {
             <div className="bg-charcoal-800/50 border border-white/5 rounded-sm p-6">
               <h3 className="font-display text-lg font-bold text-white mb-3">Assumptions</h3>
               <ul className="text-sm text-gray-400 space-y-2">
-                <li>• 7% interest rate on 30-year fixed mortgage</li>
-                <li>• 28% of gross monthly income for housing costs</li>
+                <li>• {INTEREST_RATE * 100}% interest rate on {LOAN_TERM_YEARS}-year fixed mortgage</li>
+                <li>• {HOUSING_COST_RATIO * 100}% of gross monthly income for housing costs</li>
                 <li>• Average RSU value over 4-year vesting schedule</li>
                 <li>• Does not include property taxes, insurance, or HOA fees</li>
                 <li>• Actual approval depends on credit score and debt-to-income ratio</li>
