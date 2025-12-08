@@ -35,6 +35,9 @@ describe('Contact', () => {
       writable: true,
       configurable: true,
     });
+
+    // Clear localStorage before each test
+    localStorage.clear();
   });
 
   afterEach(() => {
@@ -128,11 +131,12 @@ describe('Contact', () => {
       });
 
       expect(getMockInsert()).toHaveBeenCalledWith([
-        {
+        expect.objectContaining({
           name: 'John Doe',
           contact: 'john@example.com',
           message: 'Test message',
-        },
+          client_fingerprint: expect.any(String),
+        }),
       ]);
     });
 
@@ -162,6 +166,56 @@ describe('Contact', () => {
       await waitFor(() => {
         expect(screen.getByText(/Thanks Jane/)).toBeInTheDocument();
         expect(screen.getByText(/jane@test.com/)).toBeInTheDocument();
+      });
+    });
+
+    it('includes browser fingerprint in submission', async () => {
+      const user = userEvent.setup();
+      render(<Contact />);
+
+      await user.type(screen.getByPlaceholderText('Your name'), 'Test User');
+      await user.type(screen.getByPlaceholderText('how can I reach you?'), 'test@example.com');
+      await user.type(screen.getByPlaceholderText(/I'm thinking about buying/), 'Test message');
+      await user.click(screen.getByRole('button', { name: /send message/i }));
+
+      await waitFor(() => {
+        const insertCall = getMockInsert().mock.calls[0][0][0];
+        expect(insertCall.client_fingerprint).toBeDefined();
+        expect(insertCall.client_fingerprint).not.toBe('');
+      });
+    });
+
+    it('persists fingerprint in localStorage', async () => {
+      const user = userEvent.setup();
+      render(<Contact />);
+
+      await user.type(screen.getByPlaceholderText('Your name'), 'Test User');
+      await user.type(screen.getByPlaceholderText('how can I reach you?'), 'test@example.com');
+      await user.type(screen.getByPlaceholderText(/I'm thinking about buying/), 'Test');
+      await user.click(screen.getByRole('button', { name: /send message/i }));
+
+      await waitFor(() => {
+        expect(localStorage.getItem('visitor_fingerprint')).toBeDefined();
+        expect(localStorage.getItem('visitor_fingerprint')).not.toBe('');
+      });
+    });
+
+    it('reuses existing fingerprint from localStorage', async () => {
+      // Set a fingerprint in localStorage first
+      const existingFingerprint = 'test-fingerprint-123';
+      localStorage.setItem('visitor_fingerprint', existingFingerprint);
+
+      const user = userEvent.setup();
+      render(<Contact />);
+
+      await user.type(screen.getByPlaceholderText('Your name'), 'Test User');
+      await user.type(screen.getByPlaceholderText('how can I reach you?'), 'test@example.com');
+      await user.type(screen.getByPlaceholderText(/I'm thinking about buying/), 'Test');
+      await user.click(screen.getByRole('button', { name: /send message/i }));
+
+      await waitFor(() => {
+        const insertCall = getMockInsert().mock.calls[0][0][0];
+        expect(insertCall.client_fingerprint).toBe(existingFingerprint);
       });
     });
   });

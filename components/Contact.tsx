@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Section } from './ui/Section';
 import { Button } from './ui/Button';
 import { ArrowRight, MessageSquare, CheckCircle, Loader2 } from 'lucide-react';
@@ -10,6 +10,16 @@ export const Contact: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fingerprint, setFingerprint] = useState<string>('');
+
+  useEffect(() => {
+    let fp = localStorage.getItem('visitor_fingerprint');
+    if (!fp) {
+      fp = Math.random().toString(36).substring(2) + Date.now().toString(36);
+      localStorage.setItem('visitor_fingerprint', fp);
+    }
+    setFingerprint(fp);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +34,8 @@ export const Contact: React.FC = () => {
           { 
             name: formState.name, 
             contact: formState.contact, 
-            message: formState.message 
+            message: formState.message,
+            client_fingerprint: fingerprint
           }
         ]);
 
