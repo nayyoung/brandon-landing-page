@@ -4,15 +4,19 @@ import { Story } from './Story';
 import { Audience } from './Audience';
 import { Contact } from './Contact';
 
+const SEO_TITLE = 'Brandon Young | Seattle Real Estate Broker';
+const SEO_DESCRIPTION = 'Seattle real estate broker for creatives, founders, and entrepreneurs. Build wealth through real estate with Brandon Young.';
+const SEO_DESCRIPTION_FULL = 'Seattle real estate broker for creatives, founders, and entrepreneurs. Build wealth through real estate with Brandon Young. Specializing in non-traditional income and investment properties.';
+
 export const HomePage: React.FC = () => {
   return (
     <>
-      <title>Brandon Young | Seattle Real Estate Broker</title>
-      <meta name="description" content="Seattle real estate broker for creatives, founders, and entrepreneurs. Build wealth through real estate with Brandon Young. Specializing in non-traditional income and investment properties." />
-      <meta property="og:title" content="Brandon Young | Seattle Real Estate Broker" />
-      <meta property="og:description" content="Seattle real estate broker for creatives, founders, and entrepreneurs. Build wealth through real estate with Brandon Young." />
-      <meta name="twitter:title" content="Brandon Young | Seattle Real Estate Broker" />
-      <meta name="twitter:description" content="Seattle real estate broker for creatives, founders, and entrepreneurs. Build wealth through real estate with Brandon Young." />
+      <title>{SEO_TITLE}</title>
+      <meta name="description" content={SEO_DESCRIPTION_FULL} />
+      <meta property="og:title" content={SEO_TITLE} />
+      <meta property="og:description" content={SEO_DESCRIPTION} />
+      <meta name="twitter:title" content={SEO_TITLE} />
+      <meta name="twitter:description" content={SEO_DESCRIPTION} />
       
       <main>
       <Hero />
