@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 // Mock the supabase module BEFORE importing Contact
@@ -293,8 +293,15 @@ describe('Contact', () => {
         expect(screen.getByText(/Failed to save to database/i)).toBeInTheDocument();
       });
 
-      // Advance timers past the 1500ms setTimeout
-      vi.advanceTimersByTime(1600);
+      // Advance timers past the 1500ms setTimeout and wait for state update
+      await act(async () => {
+        vi.advanceTimersByTime(1600);
+      });
+
+      // Wait for success state to be set after mailto redirect
+      await waitFor(() => {
+        expect(screen.getByText('Message Received!')).toBeInTheDocument();
+      });
 
       // Check that mailto was triggered
       expect(window.location.href).toContain('mailto:');
