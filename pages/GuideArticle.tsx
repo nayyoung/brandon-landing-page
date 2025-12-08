@@ -11,7 +11,7 @@ export const GuideArticle: React.FC = () => {
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: Integrate with email service (e.g., Mailchimp, ConvertKit)
-    console.log('Subscribing email:', email);
+    // For now, just show success message
     setSubscribed(true);
     setEmail('');
   };
