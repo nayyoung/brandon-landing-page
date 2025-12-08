@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { CONTACT_EMAIL, EMAIL_SUBJECTS, EMAIL_BODIES, createMailtoLink } from '../constants';
 
@@ -7,6 +8,8 @@ const mailtoLink = createMailtoLink(CONTACT_EMAIL, EMAIL_SUBJECTS.STRATEGY_CALL,
 export const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,9 +33,10 @@ export const Navigation: React.FC = () => {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { name: 'About', href: '#story' },
-    { name: 'Who I Help', href: '#audience' },
-    { name: 'Results', href: '#results' },
+    { name: 'About', href: '#story', homeOnly: true },
+    { name: 'Who I Help', href: '#audience', homeOnly: true },
+    { name: 'Results', href: '#results', homeOnly: true },
+    { name: 'Tools', href: '/tools/tech-affordability-calculator', homeOnly: false },
   ];
 
   return (
@@ -43,21 +47,40 @@ export const Navigation: React.FC = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <a href="#" className="font-display font-bold text-xl md:text-2xl tracking-tight text-white z-50">
+          <Link to="/" className="font-display font-bold text-xl md:text-2xl tracking-tight text-white z-50">
             Brandon<span className="text-copper-500">Young</span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                className="text-sm font-medium text-gray-300 hover:text-white transition-colors uppercase tracking-wider"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              if (link.homeOnly && !isHomePage) return null;
+              const isAnchorLink = link.href.startsWith('#');
+              
+              // On home page, use anchor links directly. On other pages, use React Router Link
+              if (isAnchorLink && isHomePage) {
+                return (
+                  <a 
+                    key={link.name} 
+                    href={link.href} 
+                    className="text-sm font-medium text-gray-300 hover:text-white transition-colors uppercase tracking-wider"
+                  >
+                    {link.name}
+                  </a>
+                );
+              }
+              
+              // For React Router navigation (either to other pages or to home page with anchor)
+              return (
+                <Link 
+                  key={link.name} 
+                  to={isAnchorLink ? `/${link.href}` : link.href}
+                  className="text-sm font-medium text-gray-300 hover:text-white transition-colors uppercase tracking-wider"
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -87,16 +110,36 @@ export const Navigation: React.FC = () => {
           mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
-        {navLinks.map((link) => (
-          <a 
-            key={link.name} 
-            href={link.href} 
-            className="font-display text-2xl sm:text-3xl font-bold text-white hover:text-copper-500 transition-colors py-2"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            {link.name}
-          </a>
-        ))}
+        {navLinks.map((link) => {
+          if (link.homeOnly && !isHomePage) return null;
+          const isAnchorLink = link.href.startsWith('#');
+          
+          // On home page, use anchor links directly. On other pages, use React Router Link
+          if (isAnchorLink && isHomePage) {
+            return (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                className="font-display text-2xl sm:text-3xl font-bold text-white hover:text-copper-500 transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.name}
+              </a>
+            );
+          }
+          
+          // For React Router navigation (either to other pages or to home page with anchor)
+          return (
+            <Link 
+              key={link.name} 
+              to={isAnchorLink ? `/${link.href}` : link.href}
+              className="font-display text-2xl sm:text-3xl font-bold text-white hover:text-copper-500 transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {link.name}
+            </Link>
+          );
+        })}
         <div className="h-px w-24 bg-white/10 my-4"></div>
         <a 
           href={mailtoLink}

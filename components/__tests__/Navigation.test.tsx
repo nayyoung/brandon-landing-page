@@ -1,6 +1,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import { Navigation } from '../Navigation';
+
+const renderWithRouter = (component: React.ReactElement) => {
+  return render(<BrowserRouter>{component}</BrowserRouter>);
+};
 
 describe('Navigation', () => {
   let scrollY: number;
@@ -21,39 +26,39 @@ describe('Navigation', () => {
 
   describe('rendering', () => {
     it('renders the brand name correctly', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       expect(screen.getByText('Brandon')).toBeInTheDocument();
       expect(screen.getByText('Young')).toBeInTheDocument();
     });
 
     it('renders navigation links', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       expect(screen.getAllByText('About')).toHaveLength(2); // Desktop and mobile
       expect(screen.getAllByText('Who I Help')).toHaveLength(2);
       expect(screen.getAllByText('Results')).toHaveLength(2);
     });
 
     it('renders the "Book Strategy Call" button', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       expect(screen.getAllByText('Book Strategy Call')).toHaveLength(2); // Desktop and mobile
     });
 
     it('renders mobile menu toggle button', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       expect(screen.getByLabelText('Open menu')).toBeInTheDocument();
     });
   });
 
   describe('scroll behavior', () => {
     it('starts with transparent background', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       const nav = document.querySelector('nav');
       expect(nav).toHaveClass('bg-transparent');
       expect(nav).toHaveClass('py-6');
     });
 
     it('adds scrolled styles when scrollY > 50', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
 
       act(() => {
         scrollY = 51;
@@ -67,7 +72,7 @@ describe('Navigation', () => {
     });
 
     it('removes scrolled styles when scrollY <= 50', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
 
       // First scroll down
       act(() => {
@@ -87,7 +92,7 @@ describe('Navigation', () => {
 
     it('cleans up scroll listener on unmount', () => {
       const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
-      const { unmount } = render(<Navigation />);
+      const { unmount } = renderWithRouter(<Navigation />);
 
       unmount();
 
@@ -97,13 +102,13 @@ describe('Navigation', () => {
 
   describe('mobile menu', () => {
     it('mobile menu is initially hidden (translated up)', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       const mobileMenu = document.querySelector('.fixed.inset-0.bg-charcoal-900');
       expect(mobileMenu).toHaveClass('-translate-y-full');
     });
 
     it('opens mobile menu on toggle click', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
 
       fireEvent.click(screen.getByLabelText('Open menu'));
 
@@ -112,7 +117,7 @@ describe('Navigation', () => {
     });
 
     it('closes mobile menu on second toggle click', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
 
       // Open menu
       fireEvent.click(screen.getByLabelText('Open menu'));
@@ -124,7 +129,7 @@ describe('Navigation', () => {
     });
 
     it('closes mobile menu when a nav link is clicked', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
 
       // Open menu
       fireEvent.click(screen.getByLabelText('Open menu'));
@@ -138,7 +143,7 @@ describe('Navigation', () => {
     });
 
     it('changes toggle button icon when menu is open', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
 
       expect(screen.getByLabelText('Open menu')).toBeInTheDocument();
 
@@ -150,7 +155,7 @@ describe('Navigation', () => {
 
   describe('body overflow management', () => {
     it('sets body overflow to hidden when mobile menu is open', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
 
       fireEvent.click(screen.getByLabelText('Open menu'));
 
@@ -158,7 +163,7 @@ describe('Navigation', () => {
     });
 
     it('sets body overflow to unset when mobile menu is closed', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
 
       // Open menu
       fireEvent.click(screen.getByLabelText('Open menu'));
@@ -169,7 +174,7 @@ describe('Navigation', () => {
     });
 
     it('restores body overflow on unmount', () => {
-      const { unmount } = render(<Navigation />);
+      const { unmount } = renderWithRouter(<Navigation />);
 
       // Open menu
       fireEvent.click(screen.getByLabelText('Open menu'));
@@ -183,19 +188,19 @@ describe('Navigation', () => {
 
   describe('navigation links', () => {
     it('has correct href for About link', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       const aboutLinks = screen.getAllByText('About');
       expect(aboutLinks[0].closest('a')).toHaveAttribute('href', '#story');
     });
 
     it('has correct href for Who I Help link', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       const links = screen.getAllByText('Who I Help');
       expect(links[0].closest('a')).toHaveAttribute('href', '#audience');
     });
 
     it('has correct href for Results link', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       const links = screen.getAllByText('Results');
       expect(links[0].closest('a')).toHaveAttribute('href', '#results');
     });
@@ -203,14 +208,14 @@ describe('Navigation', () => {
 
   describe('mailto link', () => {
     it('Book Strategy Call has mailto link with correct email', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       const strategyButtons = screen.getAllByText('Book Strategy Call');
       const desktopButton = strategyButtons[0].closest('a');
       expect(desktopButton).toHaveAttribute('href', expect.stringContaining('mailto:brandeauxmedia@gmail.com'));
     });
 
     it('mailto link includes strategy call subject', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       const strategyButtons = screen.getAllByText('Book Strategy Call');
       const desktopButton = strategyButtons[0].closest('a');
       expect(desktopButton).toHaveAttribute('href', expect.stringContaining('subject='));
@@ -219,19 +224,19 @@ describe('Navigation', () => {
 
   describe('responsive visibility', () => {
     it('desktop nav is hidden on mobile (md:flex hidden)', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       const desktopNav = document.querySelector('.hidden.md\\:flex.items-center.space-x-8');
       expect(desktopNav).toBeInTheDocument();
     });
 
     it('mobile menu button is visible on mobile (md:hidden)', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       const mobileButton = document.querySelector('button.md\\:hidden');
       expect(mobileButton).toBeInTheDocument();
     });
 
     it('mobile overlay is hidden on desktop (md:hidden)', () => {
-      render(<Navigation />);
+      renderWithRouter(<Navigation />);
       const mobileOverlay = document.querySelector('.fixed.inset-0.bg-charcoal-900.z-40');
       expect(mobileOverlay).toHaveClass('md:hidden');
     });
