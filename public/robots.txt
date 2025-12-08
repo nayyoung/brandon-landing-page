@@ -1,0 +1,8 @@
+# robots.txt for Brandon Young Real Estate
+# https://www.brandonyoungrealestate.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.brandonyoungrealestate.com/sitemap.xml
