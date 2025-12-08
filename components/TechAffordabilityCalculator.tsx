@@ -3,6 +3,11 @@ import { Calculator, DollarSign, TrendingUp, Home } from 'lucide-react';
 import { Section } from './ui/Section';
 import { Button } from './ui/Button';
 
+// SEO constants
+const SEO_TITLE = 'Tech Worker Home Affordability Calculator | Brandon Young Real Estate';
+const SEO_DESCRIPTION = 'Calculate how much home you can afford with your tech company compensation including RSU vesting schedules.';
+const SEO_DESCRIPTION_FULL = 'Calculate how much home you can afford with your Amazon, Microsoft, or other tech company compensation including RSU vesting schedules. Free calculator for Seattle tech workers.';
+
 // Mortgage calculation constants
 const INTEREST_RATE = 0.07; // 7% annual interest rate
 const LOAN_TERM_YEARS = 30;
@@ -67,7 +72,15 @@ export const TechAffordabilityCalculator: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-charcoal-900 text-white pt-24 pb-16">
+    <>
+      <title>{SEO_TITLE}</title>
+      <meta name="description" content={SEO_DESCRIPTION_FULL} />
+      <meta property="og:title" content={SEO_TITLE} />
+      <meta property="og:description" content={SEO_DESCRIPTION_FULL} />
+      <meta name="twitter:title" content={SEO_TITLE} />
+      <meta name="twitter:description" content={SEO_DESCRIPTION} />
+      
+      <div className="min-h-screen bg-charcoal-900 text-white pt-24 pb-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-12">
@@ -307,5 +320,6 @@ export const TechAffordabilityCalculator: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
