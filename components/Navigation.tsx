@@ -55,19 +55,26 @@ export const Navigation: React.FC = () => {
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => {
               if (link.homeOnly && !isHomePage) return null;
-              const isExternal = link.href.startsWith('#');
-              return isExternal && isHomePage ? (
-                <a 
-                  key={link.name} 
-                  href={link.href} 
-                  className="text-sm font-medium text-gray-300 hover:text-white transition-colors uppercase tracking-wider"
-                >
-                  {link.name}
-                </a>
-              ) : (
+              const isAnchorLink = link.href.startsWith('#');
+              
+              // On home page, use anchor links directly. On other pages, use React Router Link
+              if (isAnchorLink && isHomePage) {
+                return (
+                  <a 
+                    key={link.name} 
+                    href={link.href} 
+                    className="text-sm font-medium text-gray-300 hover:text-white transition-colors uppercase tracking-wider"
+                  >
+                    {link.name}
+                  </a>
+                );
+              }
+              
+              // For React Router navigation (either to other pages or to home page with anchor)
+              return (
                 <Link 
                   key={link.name} 
-                  to={isExternal ? `/${link.href}` : link.href}
+                  to={isAnchorLink ? `/${link.href}` : link.href}
                   className="text-sm font-medium text-gray-300 hover:text-white transition-colors uppercase tracking-wider"
                 >
                   {link.name}
@@ -105,20 +112,27 @@ export const Navigation: React.FC = () => {
       >
         {navLinks.map((link) => {
           if (link.homeOnly && !isHomePage) return null;
-          const isExternal = link.href.startsWith('#');
-          return isExternal && isHomePage ? (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              className="font-display text-2xl sm:text-3xl font-bold text-white hover:text-copper-500 transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {link.name}
-            </a>
-          ) : (
+          const isAnchorLink = link.href.startsWith('#');
+          
+          // On home page, use anchor links directly. On other pages, use React Router Link
+          if (isAnchorLink && isHomePage) {
+            return (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                className="font-display text-2xl sm:text-3xl font-bold text-white hover:text-copper-500 transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.name}
+              </a>
+            );
+          }
+          
+          // For React Router navigation (either to other pages or to home page with anchor)
+          return (
             <Link 
               key={link.name} 
-              to={isExternal ? `/${link.href}` : link.href}
+              to={isAnchorLink ? `/${link.href}` : link.href}
               className="font-display text-2xl sm:text-3xl font-bold text-white hover:text-copper-500 transition-colors py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
