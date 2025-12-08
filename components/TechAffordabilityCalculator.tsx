@@ -67,7 +67,15 @@ export const TechAffordabilityCalculator: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-charcoal-900 text-white pt-24 pb-16">
+    <>
+      <title>Tech Worker Home Affordability Calculator | Brandon Young Real Estate</title>
+      <meta name="description" content="Calculate how much home you can afford with your Amazon, Microsoft, or other tech company compensation including RSU vesting schedules. Free calculator for Seattle tech workers." />
+      <meta property="og:title" content="Tech Worker Home Affordability Calculator | Brandon Young Real Estate" />
+      <meta property="og:description" content="Calculate how much home you can afford with your tech company compensation including RSU vesting schedules. Free calculator for Seattle tech workers." />
+      <meta name="twitter:title" content="Tech Worker Home Affordability Calculator | Brandon Young" />
+      <meta name="twitter:description" content="Calculate how much home you can afford with your tech company compensation including RSU vesting schedules." />
+      
+      <div className="min-h-screen bg-charcoal-900 text-white pt-24 pb-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-12">
@@ -307,5 +315,6 @@ export const TechAffordabilityCalculator: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };

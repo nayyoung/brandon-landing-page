@@ -6,7 +6,15 @@ import { Contact } from './Contact';
 
 export const HomePage: React.FC = () => {
   return (
-    <main>
+    <>
+      <title>Brandon Young | Seattle Real Estate Broker</title>
+      <meta name="description" content="Seattle real estate broker for creatives, founders, and entrepreneurs. Build wealth through real estate with Brandon Young. Specializing in non-traditional income and investment properties." />
+      <meta property="og:title" content="Brandon Young | Seattle Real Estate Broker" />
+      <meta property="og:description" content="Seattle real estate broker for creatives, founders, and entrepreneurs. Build wealth through real estate with Brandon Young." />
+      <meta name="twitter:title" content="Brandon Young | Seattle Real Estate Broker" />
+      <meta name="twitter:description" content="Seattle real estate broker for creatives, founders, and entrepreneurs. Build wealth through real estate with Brandon Young." />
+      
+      <main>
       <Hero />
       <Story />
       <Audience />
@@ -37,5 +45,6 @@ export const HomePage: React.FC = () => {
 
       <Contact />
     </main>
+    </>
   );
 };
