@@ -22,6 +22,11 @@ export const Navigation: React.FC = () => {
     } else {
       document.body.style.overflow = 'unset';
     }
+    
+    // Cleanup: restore overflow when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [mobileMenuOpen]);
 
   const navLinks = [
