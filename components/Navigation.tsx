@@ -36,6 +36,7 @@ export const Navigation: React.FC = () => {
     { name: 'About', href: '#story', homeOnly: true },
     { name: 'Who I Help', href: '#audience', homeOnly: true },
     { name: 'Results', href: '#results', homeOnly: true },
+    { name: 'Guides', href: '/guides', homeOnly: false },
     { name: 'Tools', href: '/tools/tech-affordability-calculator', homeOnly: false },
   ];
 
